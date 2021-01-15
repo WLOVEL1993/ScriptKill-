@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hualife.scriptkill.mapper.RoleMapper">
+  <resultMap id="BaseResultMap" type="com.hualife.scriptkill.model.Role">
+    <id column="role_id" jdbcType="INTEGER" property="roleId" />
+    <result column="script_id" jdbcType="INTEGER" property="scriptId" />
+    <result column="role_name" jdbcType="VARCHAR" property="roleName" />
+    <result column="role_brief" jdbcType="VARCHAR" property="roleBrief" />
+    <result column="role_script" jdbcType="VARCHAR" property="roleScript" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    role_id, script_id, role_name, role_brief, role_script
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_role
+    where role_id = #{roleId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_role
+    where role_id = #{roleId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hualife.scriptkill.model.Role">
+    insert into t_role (role_id, script_id, role_name, 
+      role_brief, role_script)
+    values (#{roleId,jdbcType=INTEGER}, #{scriptId,jdbcType=INTEGER}, #{roleName,jdbcType=VARCHAR}, 
+      #{roleBrief,jdbcType=VARCHAR}, #{roleScript,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hualife.scriptkill.model.Role">
+    insert into t_role
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="roleId != null">
+        role_id,
+      </if>
+      <if test="scriptId != null">
+        script_id,
+      </if>
+      <if test="roleName != null">
+        role_name,
+      </if>
+      <if test="roleBrief != null">
+        role_brief,
+      </if>
+      <if test="roleScript != null">
+        role_script,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="roleId != null">
+        #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="scriptId != null">
+        #{scriptId,jdbcType=INTEGER},
+      </if>
+      <if test="roleName != null">
+        #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="roleBrief != null">
+        #{roleBrief,jdbcType=VARCHAR},
+      </if>
+      <if test="roleScript != null">
+        #{roleScript,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hualife.scriptkill.model.Role">
+    update t_role
+    <set>
+      <if test="scriptId != null">
+        script_id = #{scriptId,jdbcType=INTEGER},
+      </if>
+      <if test="roleName != null">
+        role_name = #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="roleBrief != null">
+        role_brief = #{roleBrief,jdbcType=VARCHAR},
+      </if>
+      <if test="roleScript != null">
+        role_script = #{roleScript,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where role_id = #{roleId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hualife.scriptkill.model.Role">
+    update t_role
+    set script_id = #{scriptId,jdbcType=INTEGER},
+      role_name = #{roleName,jdbcType=VARCHAR},
+      role_brief = #{roleBrief,jdbcType=VARCHAR},
+      role_script = #{roleScript,jdbcType=VARCHAR}
+    where role_id = #{roleId,jdbcType=INTEGER}
+  </update>
+</mapper>

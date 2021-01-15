@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hualife.scriptkill.mapper.TaskClueMapper">
+  <resultMap id="BaseResultMap" type="com.hualife.scriptkill.model.TaskClue">
+    <id column="task_id" jdbcType="INTEGER" property="taskId" />
+    <result column="role_id" jdbcType="INTEGER" property="roleId" />
+    <result column="clue_id" jdbcType="INTEGER" property="clueId" />
+    <result column="is_public" jdbcType="CHAR" property="isPublic" />
+    <result column="tearing_time" jdbcType="TIMESTAMP" property="tearingTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    task_id, role_id, clue_id, is_public, tearing_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_task_clue
+    where task_id = #{taskId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_task_clue
+    where task_id = #{taskId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hualife.scriptkill.model.TaskClue">
+    insert into t_task_clue (task_id, role_id, clue_id, 
+      is_public, tearing_time)
+    values (#{taskId,jdbcType=INTEGER}, #{roleId,jdbcType=INTEGER}, #{clueId,jdbcType=INTEGER}, 
+      #{isPublic,jdbcType=CHAR}, #{tearingTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hualife.scriptkill.model.TaskClue">
+    insert into t_task_clue
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="taskId != null">
+        task_id,
+      </if>
+      <if test="roleId != null">
+        role_id,
+      </if>
+      <if test="clueId != null">
+        clue_id,
+      </if>
+      <if test="isPublic != null">
+        is_public,
+      </if>
+      <if test="tearingTime != null">
+        tearing_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="taskId != null">
+        #{taskId,jdbcType=INTEGER},
+      </if>
+      <if test="roleId != null">
+        #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="clueId != null">
+        #{clueId,jdbcType=INTEGER},
+      </if>
+      <if test="isPublic != null">
+        #{isPublic,jdbcType=CHAR},
+      </if>
+      <if test="tearingTime != null">
+        #{tearingTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hualife.scriptkill.model.TaskClue">
+    update t_task_clue
+    <set>
+      <if test="roleId != null">
+        role_id = #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="clueId != null">
+        clue_id = #{clueId,jdbcType=INTEGER},
+      </if>
+      <if test="isPublic != null">
+        is_public = #{isPublic,jdbcType=CHAR},
+      </if>
+      <if test="tearingTime != null">
+        tearing_time = #{tearingTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where task_id = #{taskId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hualife.scriptkill.model.TaskClue">
+    update t_task_clue
+    set role_id = #{roleId,jdbcType=INTEGER},
+      clue_id = #{clueId,jdbcType=INTEGER},
+      is_public = #{isPublic,jdbcType=CHAR},
+      tearing_time = #{tearingTime,jdbcType=TIMESTAMP}
+    where task_id = #{taskId,jdbcType=INTEGER}
+  </update>
+</mapper>

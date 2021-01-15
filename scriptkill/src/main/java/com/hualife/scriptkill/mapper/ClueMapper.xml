@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hualife.scriptkill.mapper.ClueMapper">
+  <resultMap id="BaseResultMap" type="com.hualife.scriptkill.model.Clue">
+    <id column="clue_id" jdbcType="INTEGER" property="clueId" />
+    <result column="script_id" jdbcType="INTEGER" property="scriptId" />
+    <result column="clue_type" jdbcType="CHAR" property="clueType" />
+    <result column="clue_value" jdbcType="INTEGER" property="clueValue" />
+    <result column="clue_name" jdbcType="VARCHAR" property="clueName" />
+    <result column="clue_content" jdbcType="VARCHAR" property="clueContent" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    clue_id, script_id, clue_type, clue_value, clue_name, clue_content
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_clue
+    where clue_id = #{clueId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_clue
+    where clue_id = #{clueId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hualife.scriptkill.model.Clue">
+    insert into t_clue (clue_id, script_id, clue_type, 
+      clue_value, clue_name, clue_content
+      )
+    values (#{clueId,jdbcType=INTEGER}, #{scriptId,jdbcType=INTEGER}, #{clueType,jdbcType=CHAR}, 
+      #{clueValue,jdbcType=INTEGER}, #{clueName,jdbcType=VARCHAR}, #{clueContent,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hualife.scriptkill.model.Clue">
+    insert into t_clue
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="clueId != null">
+        clue_id,
+      </if>
+      <if test="scriptId != null">
+        script_id,
+      </if>
+      <if test="clueType != null">
+        clue_type,
+      </if>
+      <if test="clueValue != null">
+        clue_value,
+      </if>
+      <if test="clueName != null">
+        clue_name,
+      </if>
+      <if test="clueContent != null">
+        clue_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="clueId != null">
+        #{clueId,jdbcType=INTEGER},
+      </if>
+      <if test="scriptId != null">
+        #{scriptId,jdbcType=INTEGER},
+      </if>
+      <if test="clueType != null">
+        #{clueType,jdbcType=CHAR},
+      </if>
+      <if test="clueValue != null">
+        #{clueValue,jdbcType=INTEGER},
+      </if>
+      <if test="clueName != null">
+        #{clueName,jdbcType=VARCHAR},
+      </if>
+      <if test="clueContent != null">
+        #{clueContent,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hualife.scriptkill.model.Clue">
+    update t_clue
+    <set>
+      <if test="scriptId != null">
+        script_id = #{scriptId,jdbcType=INTEGER},
+      </if>
+      <if test="clueType != null">
+        clue_type = #{clueType,jdbcType=CHAR},
+      </if>
+      <if test="clueValue != null">
+        clue_value = #{clueValue,jdbcType=INTEGER},
+      </if>
+      <if test="clueName != null">
+        clue_name = #{clueName,jdbcType=VARCHAR},
+      </if>
+      <if test="clueContent != null">
+        clue_content = #{clueContent,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where clue_id = #{clueId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hualife.scriptkill.model.Clue">
+    update t_clue
+    set script_id = #{scriptId,jdbcType=INTEGER},
+      clue_type = #{clueType,jdbcType=CHAR},
+      clue_value = #{clueValue,jdbcType=INTEGER},
+      clue_name = #{clueName,jdbcType=VARCHAR},
+      clue_content = #{clueContent,jdbcType=VARCHAR}
+    where clue_id = #{clueId,jdbcType=INTEGER}
+  </update>
+</mapper>

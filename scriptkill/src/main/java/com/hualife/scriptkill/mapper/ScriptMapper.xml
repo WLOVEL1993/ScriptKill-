@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hualife.scriptkill.mapper.ScriptMapper">
+  <resultMap id="BaseResultMap" type="com.hualife.scriptkill.model.Script">
+    <id column="script_id" jdbcType="INTEGER" property="scriptId" />
+    <result column="script_name" jdbcType="VARCHAR" property="scriptName" />
+    <result column="script_difficulty" jdbcType="CHAR" property="scriptDifficulty" />
+    <result column="script_type" jdbcType="CHAR" property="scriptType" />
+    <result column="script_population" jdbcType="INTEGER" property="scriptPopulation" />
+    <result column="script_state" jdbcType="CHAR" property="scriptState" />
+    <result column="script_brief" jdbcType="VARCHAR" property="scriptBrief" />
+    <result column="script_result" jdbcType="VARCHAR" property="scriptResult" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    script_id, script_name, script_difficulty, script_type, script_population, script_state, 
+    script_brief, script_result
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_script
+    where script_id = #{scriptId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_script
+    where script_id = #{scriptId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hualife.scriptkill.model.Script">
+    insert into t_script (script_id, script_name, script_difficulty, 
+      script_type, script_population, script_state, 
+      script_brief, script_result)
+    values (#{scriptId,jdbcType=INTEGER}, #{scriptName,jdbcType=VARCHAR}, #{scriptDifficulty,jdbcType=CHAR}, 
+      #{scriptType,jdbcType=CHAR}, #{scriptPopulation,jdbcType=INTEGER}, #{scriptState,jdbcType=CHAR}, 
+      #{scriptBrief,jdbcType=VARCHAR}, #{scriptResult,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hualife.scriptkill.model.Script">
+    insert into t_script
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="scriptId != null">
+        script_id,
+      </if>
+      <if test="scriptName != null">
+        script_name,
+      </if>
+      <if test="scriptDifficulty != null">
+        script_difficulty,
+      </if>
+      <if test="scriptType != null">
+        script_type,
+      </if>
+      <if test="scriptPopulation != null">
+        script_population,
+      </if>
+      <if test="scriptState != null">
+        script_state,
+      </if>
+      <if test="scriptBrief != null">
+        script_brief,
+      </if>
+      <if test="scriptResult != null">
+        script_result,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="scriptId != null">
+        #{scriptId,jdbcType=INTEGER},
+      </if>
+      <if test="scriptName != null">
+        #{scriptName,jdbcType=VARCHAR},
+      </if>
+      <if test="scriptDifficulty != null">
+        #{scriptDifficulty,jdbcType=CHAR},
+      </if>
+      <if test="scriptType != null">
+        #{scriptType,jdbcType=CHAR},
+      </if>
+      <if test="scriptPopulation != null">
+        #{scriptPopulation,jdbcType=INTEGER},
+      </if>
+      <if test="scriptState != null">
+        #{scriptState,jdbcType=CHAR},
+      </if>
+      <if test="scriptBrief != null">
+        #{scriptBrief,jdbcType=VARCHAR},
+      </if>
+      <if test="scriptResult != null">
+        #{scriptResult,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hualife.scriptkill.model.Script">
+    update t_script
+    <set>
+      <if test="scriptName != null">
+        script_name = #{scriptName,jdbcType=VARCHAR},
+      </if>
+      <if test="scriptDifficulty != null">
+        script_difficulty = #{scriptDifficulty,jdbcType=CHAR},
+      </if>
+      <if test="scriptType != null">
+        script_type = #{scriptType,jdbcType=CHAR},
+      </if>
+      <if test="scriptPopulation != null">
+        script_population = #{scriptPopulation,jdbcType=INTEGER},
+      </if>
+      <if test="scriptState != null">
+        script_state = #{scriptState,jdbcType=CHAR},
+      </if>
+      <if test="scriptBrief != null">
+        script_brief = #{scriptBrief,jdbcType=VARCHAR},
+      </if>
+      <if test="scriptResult != null">
+        script_result = #{scriptResult,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where script_id = #{scriptId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hualife.scriptkill.model.Script">
+    update t_script
+    set script_name = #{scriptName,jdbcType=VARCHAR},
+      script_difficulty = #{scriptDifficulty,jdbcType=CHAR},
+      script_type = #{scriptType,jdbcType=CHAR},
+      script_population = #{scriptPopulation,jdbcType=INTEGER},
+      script_state = #{scriptState,jdbcType=CHAR},
+      script_brief = #{scriptBrief,jdbcType=VARCHAR},
+      script_result = #{scriptResult,jdbcType=VARCHAR}
+    where script_id = #{scriptId,jdbcType=INTEGER}
+  </update>
+</mapper>

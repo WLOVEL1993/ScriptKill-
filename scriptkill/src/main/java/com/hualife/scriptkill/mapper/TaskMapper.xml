@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hualife.scriptkill.mapper.TaskMapper">
+  <resultMap id="BaseResultMap" type="com.hualife.scriptkill.model.Task">
+    <id column="task_id" jdbcType="INTEGER" property="taskId" />
+    <result column="script_id" jdbcType="INTEGER" property="scriptId" />
+    <result column="task_state" jdbcType="VARCHAR" property="taskState" />
+    <result column="task_pass" jdbcType="VARCHAR" property="taskPass" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    task_id, script_id, task_state, task_pass, create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_task
+    where task_id = #{taskId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_task
+    where task_id = #{taskId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hualife.scriptkill.model.Task">
+    insert into t_task (task_id, script_id, task_state, 
+      task_pass, create_time)
+    values (#{taskId,jdbcType=INTEGER}, #{scriptId,jdbcType=INTEGER}, #{taskState,jdbcType=VARCHAR}, 
+      #{taskPass,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hualife.scriptkill.model.Task">
+    insert into t_task
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="taskId != null">
+        task_id,
+      </if>
+      <if test="scriptId != null">
+        script_id,
+      </if>
+      <if test="taskState != null">
+        task_state,
+      </if>
+      <if test="taskPass != null">
+        task_pass,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="taskId != null">
+        #{taskId,jdbcType=INTEGER},
+      </if>
+      <if test="scriptId != null">
+        #{scriptId,jdbcType=INTEGER},
+      </if>
+      <if test="taskState != null">
+        #{taskState,jdbcType=VARCHAR},
+      </if>
+      <if test="taskPass != null">
+        #{taskPass,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hualife.scriptkill.model.Task">
+    update t_task
+    <set>
+      <if test="scriptId != null">
+        script_id = #{scriptId,jdbcType=INTEGER},
+      </if>
+      <if test="taskState != null">
+        task_state = #{taskState,jdbcType=VARCHAR},
+      </if>
+      <if test="taskPass != null">
+        task_pass = #{taskPass,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where task_id = #{taskId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hualife.scriptkill.model.Task">
+    update t_task
+    set script_id = #{scriptId,jdbcType=INTEGER},
+      task_state = #{taskState,jdbcType=VARCHAR},
+      task_pass = #{taskPass,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where task_id = #{taskId,jdbcType=INTEGER}
+  </update>
+</mapper>
